@@ -26,7 +26,7 @@ export class AuthService {
       // JWT <---- para mantener la autenticación del usuario
 
       // Email de confirmación
-
+      //!ENviamos el entity sin el Password
       const { password, ...userEntity } = UserEntity.fromObject(user);
 
 
@@ -52,7 +52,7 @@ export class AuthService {
 
 
     const { password, ...userEntity} = UserEntity.fromObject( user );
-    
+    //!En el token grabamos el id,email
     const token = await JwtAdapter.generateToken({ id: user.id, email: user.email });
     if ( !token ) throw CustomError.internalServer('Error while creating JWT');
 

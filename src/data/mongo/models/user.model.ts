@@ -24,7 +24,9 @@ const userSchema = new mongoose.Schema( {
     type: String,
   },
   role: {
+    //! Cuando el campo tiene configurado una enumeracion es necesario que cuando el tipo sea un array hay que especificar [String] y no el tipo de dato Array
     type: [String],
+    //type: Array,
     default: ['USER_ROLE'],
     enum: ['ADMIN_ROLE','USER_ROLE']
   }
