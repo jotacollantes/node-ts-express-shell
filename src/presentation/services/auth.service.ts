@@ -32,7 +32,8 @@ export class AuthService {
       await this.sendEmailValidationLink( user.email );
 
       const { password, ...userEntity } = UserEntity.fromObject(user);
-
+      
+      //!Este token (que solo incluye el id) no es el mismo que el token que se genera y que es enviado por email para validadar la cuenta,
       const token = await JwtAdapter.generateToken({ id: user.id });
       if ( !token ) throw CustomError.internalServer('Error while creating JWT');
 
@@ -73,6 +74,7 @@ export class AuthService {
   private sendEmailValidationLink = async( email: string ) => {
 
     const token = await JwtAdapter.generateToken({ email });
+    console.log(token)
     if ( !token ) throw CustomError.internalServer('Error getting token');
 
     const link = `${ envs.WEBSERVICE_URL }/auth/validate-email/${ token }`;
@@ -85,7 +87,7 @@ export class AuthService {
     const options = {
       to: email,
       subject: 'Validate your email',
-      htmlBody: html,
+      htmlBody:html,
     }
 
     const isSent = await this.emailService.sendEmail(options);
@@ -96,16 +98,21 @@ export class AuthService {
 
 
   public validateEmail = async(token:string) => {
-
+    //!Verificamos el token
     const payload = await JwtAdapter.validateToken(token);
+    console.log({payload})
     if ( !payload ) throw CustomError.unauthorized('Invalid token');
-
-    const { email } = payload as { email: string };
+    
+    //! El payload como en el metodo JwtAdapter.validateToken() viene de tipo unknow se le puede especificar de tipo string y verificamos si es que existe en correo en el payload.
+    
+    const { email } = payload as { email: string } ;
     if ( !email ) throw CustomError.internalServer('Email not in token');
 
+    //!Verificamos la existencia del usuario en la BD
     const user = await UserModel.findOne({ email });
     if ( !user ) throw CustomError.internalServer('Email not exists');
 
+    //! Actualizamos el campo emailValidated en la BD en true 
     user.emailValidated = true;
     await user.save();
 

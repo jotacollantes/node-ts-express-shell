@@ -49,6 +49,7 @@ export class AuthController {
 
 
   validateEmail = (req: Request, res: Response) => {
+    //! el token lo obtenemos desde el segmento de la url
     const { token } = req.params;
     
     this.authService.validateEmail( token )
