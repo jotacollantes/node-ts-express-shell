@@ -26,7 +26,7 @@ export class JwtAdapter {
 
   }
 
-
+ //! T es el tipo de dato que se envia como argumento o sea { id: string }
   static validateToken<T>(token: string): Promise< T | null> {
     
     return new Promise( (resolve) => {

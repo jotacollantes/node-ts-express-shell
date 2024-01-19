@@ -29,6 +29,7 @@ export class Server {
     
 
     //* Middlewares
+    //! Para que acepte ambos formatos de request
     this.app.use( express.json() ); // raw
     this.app.use( express.urlencoded({ extended: true }) ); // x-www-form-urlencoded
 

@@ -17,9 +17,10 @@ export class CategoryService {
     if ( categoryExists ) throw CustomError.badRequest( 'Category already exists' );
 
     try {
-
+      //!Creo una instancia de Category Model para grabar un registro nuevo
       const category = new CategoryModel( {
         ...createCategoryDto,
+        //!Sobreescribo la propiedad user
         user: user.id,
       } );
 
@@ -47,13 +48,21 @@ export class CategoryService {
 
     try {
 
+      // const categories=await CategoryModel.find()
+      // return categories.map((categorie)=>({
+      //   id:categorie.id,
+      //   name:categorie.name,
+      //   available:categorie.available}))
+
       // const total = await CategoryModel.countDocuments();
       // const categories = await CategoryModel.find()
       //   .skip( (page - 1) * limit )
       //   .limit( limit )
+      //!Ejecutamos los Query a la bd en simultaneo. El promise.all graba las respuestas en un arreglo
       const [ total, categories ] = await Promise.all( [
         CategoryModel.countDocuments(),
         CategoryModel.find()
+        //! La pagina es en base 0 por eso resto 1
           .skip( ( page - 1 ) * limit )
           .limit( limit )
       ] );

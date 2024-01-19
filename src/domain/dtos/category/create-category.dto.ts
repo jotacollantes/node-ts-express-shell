@@ -1,7 +1,3 @@
-
-
-
-
 export class CreateCategoryDto {
 
   private constructor(
@@ -16,10 +12,11 @@ export class CreateCategoryDto {
     let availableBoolean = available;
 
     if ( !name ) return ['Missing name'];
+    //! Hacemos una transformacion para available que desde la request viene como string, hay que trasnformarlo a boolean
     if ( typeof available !== 'boolean' ) {
       availableBoolean = ( available === 'true' )
     }
-
+    //! Retornamos una instancia del dto CreateCategoryDto
     return [undefined, new CreateCategoryDto(name, availableBoolean)];
 
   }

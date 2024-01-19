@@ -18,6 +18,7 @@ export class CategoryRoutes {
 
     // Definir las rutas
     router.get( '/', controller.getCategories );
+    //! COnfiguramos como segundo argumento el middleware
     router.post( '/',[ AuthMiddleware.validateJWT ],controller.createCategory );
 
 
