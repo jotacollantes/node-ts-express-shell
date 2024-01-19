@@ -44,7 +44,7 @@ export class ProductService {
           .limit( limit )
           .populate('user')
           .populate('category')
-          // .populate('user', 'name email')
+          // .populate('user', 'name email') //Esta es una opcion que permite seleccionar que campos mostrar en el populate
       ] );
 
 

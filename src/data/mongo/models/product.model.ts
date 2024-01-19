@@ -35,12 +35,12 @@ const productSchema = new mongoose.Schema( {
 
 } );
 
-
+//Para serializar una respuesta a un  objeto Json
 productSchema.set('toJSON', {
-  virtuals: true,
-  versionKey: false,
+  virtuals: true, //virtuals anade el campo id con el mismo valor del campo _id
+  versionKey: false, // quita el campo --v
   transform: function( doc, ret, options ) {
-    delete ret._id;
+    delete ret._id; //Eliminamos el campo _id de la respuesta
   },
 })
 

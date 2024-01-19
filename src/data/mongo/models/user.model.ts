@@ -32,11 +32,11 @@ const userSchema = new mongoose.Schema( {
 } );
 
 userSchema.set('toJSON', {
-  virtuals: true,
-  versionKey: false,
+  virtuals: true, //Anade el campo id con el mismo valor de _id
+  versionKey: false, //Elimina de la respuesta el campo --v
   transform: function( doc, ret, options ) {
-    delete ret._id;
-    delete ret.password;
+    delete ret._id; //Elimina de la respuesta el campo _id
+    delete ret.password; //Elimina de la respuesta el campo de contrasena
   },
 })
 

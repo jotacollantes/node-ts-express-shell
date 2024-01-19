@@ -17,6 +17,8 @@ import { seedData } from './data';
 
 
 const randomBetween0AndX = ( x: number ) => {
+  //random devuelve 0 o 1
+  //floor redondea al entero menor Ex. 45.95 -> 45
   return Math.floor( Math.random() * x );
 }
 
@@ -53,18 +55,12 @@ async function main() {
 
       return {
         ...product,
+        //El indice es aleatorio, envio como argumento el numero de elementos del arreglo
         user: users[ randomBetween0AndX( seedData.users.length - 1 ) ]._id,
+        //El indice es aleatorio, envio como argumento el numero de elementos del arreglo
         category: categories[ randomBetween0AndX( seedData.categories.length - 1 )  ]._id
       }
-
-
     })
   );
-
-
-
-
   console.log('SEEDED');
-
-
 }

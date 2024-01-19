@@ -27,15 +27,15 @@ export class CreateProductDto {
 
     if ( !user ) return [ 'Missing user' ];
     if ( !Validators.isMongoID(user) ) return ['Invalid User ID'];
-    
     if ( !category ) return [ 'Missing category' ];
-    if ( !Validators.isMongoID(category) ) return ['Invalid User ID'];
+    if ( !Validators.isMongoID(category) ) return ['Invalid Category ID'];
     
 
     return [
       undefined,
       new CreateProductDto(
         name,
+        //! Aunquer el campo available en el modelo esta definido como boolean se pued dar el caso de que venga un string, de ser el caso hacemos la doble negacion para manetener el valor booleano
         !!available,
         price,
         description,
