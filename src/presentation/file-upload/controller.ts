@@ -24,11 +24,14 @@ export class FileUploadController {
 
 
   uploadFile = ( req: Request, res: Response ) => {
+   //! Este middleware his.app.use(fileUpload({})); establece la propiedad file en la Req.
 
+   //! .type es el aregumento que se envia en la ruta del controlador:  router.post("/single/:type")
     const type = req.params.type;
+    //! El middleware se encargo de grabar las imagenes en req.body.files
     const file = req.body.files.at(0) as UploadedFile;
 
-    
+    //! type es la subcarpeta que puede ser users, categories, products
     this.fileUploadService.uploadSingle( file, `uploads/${ type }` )
       .then( uploaded => res.json(uploaded) )
       .catch(  error => this.handleError( error, res ) )
@@ -36,7 +39,7 @@ export class FileUploadController {
   };
 
   
-  uploadMultileFiles = ( req: Request, res: Response ) => {
+  uploadMultipleFiles = ( req: Request, res: Response ) => {
 
     const type = req.params.type;
     const files = req.body.files as UploadedFile[];

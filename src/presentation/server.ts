@@ -32,6 +32,7 @@ export class Server {
     //* Middlewares
     this.app.use( express.json() ); // raw
     this.app.use( express.urlencoded({ extended: true }) ); // x-www-form-urlencoded
+    //Middleware para la carga de archivos
     this.app.use(fileUpload({
       limits: { fileSize: 50 * 1024 * 1024 },
     }));
