@@ -17,7 +17,7 @@ import { seedData } from './data';
 
 
 const randomBetween0AndX = ( x: number ) => {
-  //random devuelve 0 o 1
+  //random devuelve 0 o un numero coma flotante, el uno no se 1
   //floor redondea al entero menor Ex. 45.95 -> 45
   return Math.floor( Math.random() * x );
 }
