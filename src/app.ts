@@ -18,7 +18,7 @@ async function main() {
 
   const server = new Server({
     port: envs.PORT,
-    routes: AppRoutes.routes,
+    routes: AppRoutes.routes,//Se invoca a un getter
   });
 
   server.start();

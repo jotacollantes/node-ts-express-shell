@@ -23,11 +23,13 @@ export class AuthController {
 
   registerUser = (req: Request, res: Response) => {
     //!Creamos el Dto que sera enviado al authService.registerUser
+    //! Si viene algun error en el dto retornamos un error 400
     const [error, registerDto] = RegisterUserDto.create(req.body);
     if ( error ) return res.status(400).json({error})
 
 
     this.authService.registerUser(registerDto!)
+       //El callback va a ejecutar la response
       .then( (user) => res.json(user) )
       .catch( error => this.handleError(error, res) );
       
@@ -42,6 +44,7 @@ export class AuthController {
 
 
     this.authService.loginUser(loginUserDto!)
+    //El callback va a ejecutar la response
       .then( (user) => res.json(user) )
       .catch( error => this.handleError(error, res) );
       

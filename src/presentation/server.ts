@@ -35,7 +35,7 @@ export class Server {
     //* Public Folder
     this.app.use( express.static( this.publicPath ) );
 
-    //* Routes
+    //* Routes personalizadas
     this.app.use( this.routes );
 
     //* SPA
